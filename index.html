@@ -1,0 +1,59 @@
+<!doctype html>
+
+<html>
+    <style>
+        body {
+           background-color: skyblue;
+        }
+        h1 {
+           color: blue;
+        }
+        button {
+            background-color: red;
+            color: white;
+        }
+    </style>
+    <body>
+        <h1>My SAMS (Coding)</h1>
+        <p>Click here for subjects</p>
+        <button onclick="location.href='Code.html'">
+            Code
+        </button>
+        <br>
+        <button onclick="location.href='Education.html'">
+            Education
+        </button>
+        <br>
+        <button onclick="location.href='Afterschool.html'">
+            Afterschool
+        </button>
+        <br>
+        <button onclick="location.href='Career.html'">
+            Carrer Choices
+        </button>
+        <br>
+        <form>
+        <input name="username" id="username" type="text">
+        <input name="pass" id="pass" type="password">
+        <input type="button" value="Submit" onclick="myFunction()">
+        </form> 
+
+
+        <script>
+        function myFunction(){
+        var user = document.getElementById("username").value;
+        var pass = document.getElementById("pass").value;
+
+        if(user == "Hwowdi1203" && pass == "Chic3nJockey28167"){
+                    window.location.href="win.html?extra=ono018sj"
+                alert("correct")
+        }else{
+            alert("Incorrect username or password");
+            }
+        }
+        </script>
+
+    </body>
+</html>
+
+</html>
