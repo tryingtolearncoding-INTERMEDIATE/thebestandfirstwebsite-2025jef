@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Submit Feedback</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #fafafa;
+    }
+    form {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #007bff;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #message {
+      margin-top: 15px;
+      text-align: center;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align:center;">Submit Your Feedback</h2>
+
+  <form id="feedbackForm">
+    <label for="name">Your Name:</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="feedback">Your Feedback:</label>
+    <textarea id="feedback" name="feedback" required></textarea>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="message"></div>
+
+  <script>
+    const form = document.getElementById('feedbackForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = form.name.value.trim();
+      const feedback = form.feedback.value.trim();
+
+      if (!name || !feedback) {
+        message.style.color = 'red';
+        message.textContent = 'Please fill in both fields.';
+        return;
+      }
+
+      const entry = {
+        name,
+        feedback,
+        date: new Date().toISOString()
+      };
+
+      const feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+      feedbacks.push(entry);
+      localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+
+      message.style.color = 'green';
+      message.textContent = 'Thanks for your feedback!';
+
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
