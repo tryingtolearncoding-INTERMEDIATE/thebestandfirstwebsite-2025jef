@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>View Feedback</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f0f0f0;
+    }
+    #login, #feedbackSection {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    #login label, #login input, #login button {
+      display: block;
+      width: 100%;
+      margin-top: 15px;
+      font-size: 1em;
+    }
+    #login input {
+      padding: 8px;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    #login button {
+      background: #007bff;
+      border: none;
+      color: white;
+      padding: 10px 0;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+    #login button:hover {
+      background: #0056b3;
+    }
+    #errorMsg {
+      color: red;
+      margin-top: 10px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #007bff;
+      color: white;
+    }
+    #logoutBtn {
+      background: #dc3545;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    #logoutBtn:hover {
+      background: #a71d2a;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="login">
+    <h2 style="text-align:center;">Enter Access Code</h2>
+    <input type="text" id="accessCodeInput" placeholder="Enter code" autocomplete="off" />
+    <button id="accessBtn">Access Feedback</button>
+    <div id="errorMsg"></div>
+  </div>
+
+  <div id="feedbackSection" style="display:none;">
+    <button id="logoutBtn">Logout</button>
+    <h2>Submitted Feedback</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Feedback</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="feedbackTableBody">
+        <!-- Feedback rows inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const ACCESS_CODE = 'open123'; // The code users must enter
+
+    const loginDiv = document.getElementById('login');
+    const feedbackDiv = document.getElementById('feedbackSection');
+    const accessInput = document.getElementById('accessCodeInput');
+    const accessBtn = document.getElementById('accessBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const feedbackTableBody = document.getElementById('feedbackTableBody');
+
+    // Check if already logged in
+    if (localStorage.getItem('accessGranted') === 'true') {
+      showFeedback();
+    }
+
+    accessBtn.addEventListener('click', () => {
+      const code = accessInput.value.trim();
+      if (code === ACCESS_CODE) {
+        localStorage.setItem('accessGranted', 'true');
+        errorMsg.textContent = '';
+        showFeedback();
+      } else {
+        errorMsg.textContent = 'Incorrect access code.';
+      }
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('accessGranted');
+      feedbackDiv.style.display = 'none';
+      loginDiv.style.display = 'block';
+      accessInput.value = '';
+      errorMsg.textContent = '';
+      clearTable();
+    });
+
+    function showFeedback() {
+      loginDiv.style.display = 'none';
+      feedbackDiv.style.display = 'block';
+      loadFeedback();
+    }
+
+    function loadFeedback() {
+      clearTable();
+      const feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+      if (feedbacks.length === 0) {
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.colSpan = 3;
+        td.style.textAlign = 'center';
+        td.textContent = 'No feedback submitted yet.';
+        tr.appendChild(td);
+        feedbackTableBody.appendChild(tr);
+        return;
+      }
+      feedbacks.forEach(fb => {
+        const tr = document.createElement('tr');
+
+        const nameTd = document.createElement('td');
+        nameTd.textContent = fb.name;
+        tr.appendChild(nameTd);
+
+        const feedbackTd = document.createElement('td');
+        feedbackTd.textContent = fb.feedback;
+        tr.appendChild(feedbackTd);
+
+        const dateTd = document.createElement('td');
+        dateTd.textContent = new Date(fb.date).toLocaleString();
+        tr.appendChild(dateTd);
+
+        feedbackTableBody.appendChild(tr);
+      });
+    }
+
+    function clearTable() {
+      feedbackTableBody.innerHTML = '';
+    }
+  </script>
+  <button onclick="location.href='Main.html'">Home</button>
+</body>
+</html>
