@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cool Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: black;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    canvas#particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .cube-wrapper {
+      position: fixed;
+      width: 200px;
+      height: 200px;
+      transform-style: preserve-3d;
+      animation: spin 30s linear infinite;
+      z-index: 1;
+    }
+
+    .cube-wrapper:nth-of-type(1) { top: 10%; left: 10%; animation-delay: 0s; }
+    .cube-wrapper:nth-of-type(2) { top: 40%; left: 70%; animation-delay: 5s; }
+    .cube-wrapper:nth-of-type(3) { top: 70%; left: 20%; animation-delay: 10s; }
+
+    .cube {
+      width: 200px;
+      height: 200px;
+      transform-style: preserve-3d;
+    }
+
+    .cube__face {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(45deg, #00ffcc, #0077ff);
+      border: 2px solid cyan;
+      opacity: 0.8;
+      border-radius: 10px;
+    }
+
+    .cube__face--front  { transform: translateZ(100px); }
+    .cube__face--back   { transform: rotateY(180deg) translateZ(100px); }
+    .cube__face--right  { transform: rotateY(90deg) translateZ(100px); }
+    .cube__face--left   { transform: rotateY(-90deg) translateZ(100px); }
+    .cube__face--top    { transform: rotateX(90deg) translateZ(100px); }
+    .cube__face--bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+    @keyframes spin {
+      from { transform: rotateX(0deg) rotateY(0deg); }
+      to   { transform: rotateX(360deg) rotateY(360deg); }
+    }
+
+    .overlay {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      max-width: 300px;
+    }
+
+    .overlay button, .overlay input {
+      width: 100%;
+      margin: 8px 0;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+    }
+
+    .overlay button {
+      background-color: #0077ff;
+      color: white;
+    }
+
+    .overlay button:hover {
+      background-color: cyan;
+      color: black;
+      cursor: pointer;
+    }
+
+    .overlay input[type="text"],
+    .overlay input[type="password"] {
+      background: #222;
+      color: white;
+      border: 1px solid #555;
+    }
+
+    .overlay h1 {
+      margin-bottom: 5px;
+    }
+
+    .overlay p {
+      margin-top: 0;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Particle background -->
+  <canvas id="particles"></canvas>
+
+  <!-- 3D Cubes -->
+  <div class="cube-wrapper">
+    <div class="cube">
+      <div class="cube__face cube__face--front"></div>
+      <div class="cube__face cube__face--back"></div>
+      <div class="cube__face cube__face--right"></div>
+      <div class="cube__face cube__face--left"></div>
+      <div class="cube__face cube__face--top"></div>
+      <div class="cube__face cube__face--bottom"></div>
+    </div>
+  </div>
+  <div class="cube-wrapper">
+    <div class="cube">
+      <div class="cube__face cube__face--front"></div>
+      <div class="cube__face cube__face--back"></div>
+      <div class="cube__face cube__face--right"></div>
+      <div class="cube__face cube__face--left"></div>
+      <div class="cube__face cube__face--top"></div>
+      <div class="cube__face cube__face--bottom"></div>
+    </div>
+  </div>
+  <div class="cube-wrapper">
+    <div class="cube">
+      <div class="cube__face cube__face--front"></div>
+      <div class="cube__face cube__face--back"></div>
+      <div class="cube__face cube__face--right"></div>
+      <div class="cube__face cube__face--left"></div>
+      <div class="cube__face cube__face--top"></div>
+      <div class="cube__face cube__face--bottom"></div>
+    </div>
+  </div>
+
+  <!-- UI Overlay -->
+  <div class="overlay">
+    <h1>Cool Website</h1>
+    <p>Click a subject:</p>
+    <button onclick="location.href='Code.html'">Code</button>
+    <button onclick="location.href='Education.html'">Education</button>
+    <button onclick="location.href='Afterschool.html'">Afterschool</button>
+    <button onclick="location.href='Career.html'">Career Choices</button>
+    <button onclick="location.href='index.html'">Homepage</button>
+    <button onclick="location.href='flash.html'">Monkey</button>
+
+    <form onsubmit="myFunction(); return false;">
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="pass" placeholder="Password">
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+  <script>
+    // Login function
+    function myFunction() {
+      var user = document.getElementById("username").value;
+      var pass = document.getElementById("pass").value;
+      if (user === "Polytrack" && pass === "StopSaying67") {
+        alert("Correct credentials!");
+        window.location.href = "Polytrack.html";
+      } 
+        else if (user === "Drivemad" && pass === "67isWeird") {
+        alert("Correct");
+        window.location.href = "Drivemad.html";
+      }
+        else if (user === "SecretProxy" && pass === "WebsiteP1"){
+        alert("How do you know this!?");
+        window.location.href= "Proxy1.html";
+        }
+        else if (user === "PizzaEdition" && pass === "BabyC6") {
+        alert("Another Website for you!");
+        window.location.href= "Pizza.html";
+        }
+        else if (user === "TinyFishing" && pass === "Dontt3ll"){
+        alert("Hello!");
+        window.location.href= "Escaperoad.html";
+        }
+      else {
+        alert("Incorrect username or password.");
+      }
+    }
+
+    // Particles background
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    let particles = [];
+
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 2 + 1,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: (Math.random() - 0.5) * 0.3,
+        alpha: Math.random() * 0.5 + 0.3
+      });
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, width, height);
+      for (let p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 255, 255, ${p.alpha})`;
+        ctx.shadowColor = 'cyan';
+        ctx.shadowBlur = 6;
+        ctx.fill();
+      }
+    }
+
+    function updateParticles() {
+      for (let p of particles) {
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0) p.x = width;
+        else if (p.x > width) p.x = 0;
+
+        if (p.y < 0) p.y = height;
+        else if (p.y > height) p.y = 0;
+      }
+    }
+
+    function animateParticles() {
+      drawParticles();
+      updateParticles();
+      requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener('resize', () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    });
+
+    animateParticles();
+  </script>
+</body>
+</html>
