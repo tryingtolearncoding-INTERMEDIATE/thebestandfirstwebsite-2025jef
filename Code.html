@@ -1,0 +1,31 @@
+!DOCTYPE html>
+<html>
+  <head>
+    <title>Coding Basics</title>
+    <h1>Code</h1>
+  </head>
+  <body>
+    <p>This page would teach you bsic html coding skills</p>
+    <!--Login to Main-->
+    <form>
+      <input name="username" id="username" type="text">
+      <input name="pass" id="pass" type="password">
+      <input type="button" value="Submit" onclick="LogintomainFunction()">
+    </form> 
+
+    <script>
+      function LogintomainFunction(){
+        var user = document.getElementById("username").value;
+        var pass = document.getElementById("pass").value;
+
+        if(user == "Admin" && pass == "Password"){
+          window.location.href="Main.html"
+          alert("correct");
+        }
+        else{
+          alert("Incorrect username or password");
+        }
+      }
+    </script>
+  </body>
+</html>
