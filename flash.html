@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    <head>
+        <title>All about football</title>
+        <style>ruffle-embed{height:100vh;width:100%}body{margin:0}</style>
+    </head>
+    <body>
+        <embed id="embed">
+        <script>
+            let p = new URLSearchParams(window.location.search);
+            let g = p.get("g") || "bloons-td-3.swf";
+            embed.src = "https://cdn.jsdelivr.net/gh/ohio-math/swfs/" + g;
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/@ruffle-rs/ruffle/ruffle.min.js"></script>
+        <button onclick="location,href='Main.html'">Home</button>
+    </body>
+</html>
