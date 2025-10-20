@@ -121,7 +121,7 @@
 
     accessBtn.addEventListener('click', () => {
       const code = accessInput.value.trim();
-      if (code === Feedback) {
+      if (code === ACCESS_CODE) {
         localStorage.setItem('accessGranted', 'true');
         errorMsg.textContent = '';
         showFeedback();
