@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <style>
+    body { background-color: skyblue; text-align: center; font-family: Arial; }
+    h1 { color: blue; }
+    button { background-color: red; color: white; border: none; padding: 10px 20px; margin: 5px; cursor: pointer; border-radius: 5px; }
+    input { margin: 5px; padding: 8px; border-radius: 5px; border: 1px solid gray; }
+  </style>
+</head>
+<body>
+  <h1>My SAMS (Coding)</h1>
+  <p>Click here for subjects</p>
+
+  <button onclick="location.href='Code.html'">Code</button><br>
+  <button onclick="location.href='Education.html'">Education</button><br>
+  <button onclick="location.href='Afterschool.html'">Afterschool</button><br>
+  <button onclick="location.href='Career.html'">Career Choices</button><br><br>
+
+  <form onsubmit="myFunction(); return false;">
+    <input name="username" id="username" type="text" placeholder="Username" required><br>
+    <input name="pass" id="pass" type="password" placeholder="Password" required><br>
+    <input type="submit" value="Submit">
+  </form> 
+
+  <script>
+    async function myFunction() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("pass").value;
+
+      try {
+        const response = await fetch("http://localhost:3000/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: user, password: pass })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert("Correct!");
+          window.location.href = result.redirect;
+        } else {
+          alert(result.message);
+        }
+      } catch (error) {
+        console.error(error);
+        alert("Cannot reach server. Try again later.");
+      }
+    }
+  </script>
+</body>
+</html>
