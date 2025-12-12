@@ -1,7 +1,54 @@
 
-<iframe src="https://tryingtolearncoding-intermediate.github.io/YoHoHo.io/"
-        allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        width="853"
-        height="480">
-</iframe>
+<iframe src="https://tryingtolearncoding-intermediate.github.io/YoHoHo.io/" id="myIframe" allow="fullscreen"></iframe>
+<button id="fullscreenButton">Toggle Fullscreen</button>
+
+<script>
+        // Get the elements
+        const iframe = document.getElementById('myIframe');
+        const fullscreenButton = document.getElementById('fullscreenButton');
+
+// Add click event listener to the button
+        fullscreenButton.addEventListener('click', () => {
+  // Check if the document is currently in fullscreen mode
+          if (document.fullscreenElement) {
+    // Exit fullscreen
+            document.exitFullscreen();
+          } else {
+    // Request fullscreen on the iframe element
+            if (iframe.requestFullscreen) {
+              iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) { /* Safari */
+              iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) { /* IE11 */
+              iframe.msRequestFullscreen();
+            }
+          }
+        });
+</script>
+<style>
+        /* Ensure the iframe fills the whole viewport when in fullscreen mode */
+        #myIframe:-webkit-full-screen {
+            width: 100vw;
+            height: 100vh;
+        }
+        #myIframe:-moz-full-screen {
+            width: 100vw;
+            height: 100vh;
+        }        
+        #myIframe:-ms-fullscreen {
+            width: 100vw;
+            height: 100vh;
+        }
+        #myIframe:fullscreen {
+                width: 100vw;
+            height: 100vh;
+        }
+
+/* Basic styling for the button position */
+        #fullscreenButton {
+            position: fixed; /* Position the button relative to the viewport */
+            bottom: 20px;
+            right: 20px;
+            z-index: 10000; /* Ensure it is above other elements */
+        }
+</style>
